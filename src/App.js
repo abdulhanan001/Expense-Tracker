@@ -27,10 +27,13 @@ import NewExpense from './components/NewExpense/NewExpense';
       date: new Date(2021, 5, 12),
     },
   ];
+  const addExpenseHandler = (expenseData) => {
+    // console.log(expenseData)
+  }
 
   return (
     <>
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler}/>
       <Expenses expenses = {expenses}/>
     </>
   );
