@@ -1,7 +1,7 @@
 import React from "react"; // add React only for follow convention for jsx
-import ExpenseItem from "./ExpenseItem";
 import { useState } from "react";
 import ExpensesFilter from "./ExpensesFilter";
+import ExpensesList from "./ExpensesList";
 
 const Expenses = (props) => {
   const [filteredYear, setFilteredYear] = useState("2022");
@@ -13,18 +13,7 @@ const Expenses = (props) => {
     return expense.date.getFullYear().toString() === filteredYear;
   });
 
-  let expenseContent = <p> No expense found. </p>;
 
-  if (filteredExpenses.length > 0) {
-    expenseContent = filteredExpenses.map((expense) => (
-      <ExpenseItem
-        key={expense.id}
-        title={expense.title}
-        amount={expense.amount}
-        date={expense.date}
-      />
-    ));
-  }
   return (
     <div className="App">
       <ExpensesFilter
@@ -32,7 +21,7 @@ const Expenses = (props) => {
         onChangeFilter={filterChangeHandler}
       />
       <h2>Expense Tracking App</h2>
-      {expenseContent}
+      <ExpensesList expenses={filteredExpenses} />
     </div>
   );
 };
