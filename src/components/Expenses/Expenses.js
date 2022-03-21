@@ -1,13 +1,19 @@
 import React from "react"; // add React only for follow convention for jsx
-import ExpenseItem from "./ExpenseItem";
 import { useState } from "react";
 import ExpensesFilter from "./ExpensesFilter";
+import ExpensesList from "./ExpensesList";
 
 const Expenses = (props) => {
   const [filteredYear, setFilteredYear] = useState("2022");
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
   };
+
+  const filteredExpenses = props.expenses.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+
+
   return (
     <div className="App">
       <ExpensesFilter
@@ -15,13 +21,7 @@ const Expenses = (props) => {
         onChangeFilter={filterChangeHandler}
       />
       <h2>Expense Tracking App</h2>
-      {props.expenses.map((expense) => (
-        <ExpenseItem
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-        />
-      ))}
+      <ExpensesList expenses={filteredExpenses} />
     </div>
   );
 };
